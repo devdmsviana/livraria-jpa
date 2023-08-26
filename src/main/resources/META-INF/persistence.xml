@@ -9,7 +9,7 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		
 		<!-- Entidades do Sistema -->
-		<class>br.edu.ifpb.ads.entities.Livro</class>
+		<class>br.edu.ifpb.ads.entities.Cliente</class>
 
 		
         <properties>
