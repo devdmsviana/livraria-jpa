@@ -1,18 +1,26 @@
 package br.edu.ifpb.ads.app;
 
-import java.time.LocalDate;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Scanner;
 
+import br.edu.ifpb.ads.dao.AutorDaoImpl;
 import br.edu.ifpb.ads.dao.ClienteDaoImpl;
+import br.edu.ifpb.ads.dao.LivroDaoImpl;
+import br.edu.ifpb.ads.entities.Autor;
 import br.edu.ifpb.ads.entities.Cliente;
-import br.edu.ifpb.ads.entities.Endereco;
+import br.edu.ifpb.ads.entities.Livro;
 
 
 public class MainCliente {
 
-    public static void main(String[] args) {
-        ClienteDaoImpl clienteDao = new ClienteDaoImpl();
-
-
+    public static void main(String[] args) throws ParseException {
+    	Scanner input = new Scanner(System.in);
+    	/*
+    	ClienteDaoImpl clienteDao = new ClienteDaoImpl();
         try {
             Endereco endereco = new Endereco(
                     "Rua dos bobos",
@@ -26,7 +34,8 @@ public class MainCliente {
             clienteDao.salvar(cliente);
         } catch (Exception erro) {
             System.out.println(erro);
-        }
+        }*/
+    	
     }
 
 }

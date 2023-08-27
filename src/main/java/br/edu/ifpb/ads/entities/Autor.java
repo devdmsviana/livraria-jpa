@@ -1,13 +1,17 @@
 package br.edu.ifpb.ads.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -24,28 +28,34 @@ public class Autor implements Serializable {
 	@NotBlank
 	private String nome;
 	
-	@Column(name = "data_nascimento", columnDefinition = "DATE", nullable = false)
+	@Column(name = "data_nascimento", columnDefinition = "DATE", nullable = true)
 	private Date data_nascimento;
 	
 	@Column(name = "Biografia")
-	private String biografia;
-	
+	private String biografia;	
+
 	@Column(name = "Nacionalidade")
 	private String nacionalidade;
 	
 	@Column(name = "Genero_literario")
 	private String genero_literario;
 	
+	@ManyToMany(mappedBy = "autores",cascade = CascadeType.ALL)
+	private List<Livro>livros = new ArrayList<>();
+	
+	
 	public Autor() {
 		
 	}
 
-	public Autor(String nome, Date data_nascimento, String biografia, String nacionalidade, String genero_literario) {		
+	public Autor(String nome,String nacionalidade,Date data_nascimento) {		
 		this.nome = nome;
-		this.data_nascimento = data_nascimento;
-		this.biografia = biografia;
-		this.nacionalidade = nacionalidade;
-		this.genero_literario = genero_literario;
+		this.data_nascimento = data_nascimento;		
+		this.nacionalidade = nacionalidade;		
+	}
+	
+	public long getId() {
+		return id;
 	}
 
 	public String getNome() {
@@ -87,7 +97,12 @@ public class Autor implements Serializable {
 	public void setGeneroLiterario(String genero_literario) {
 		this.genero_literario = genero_literario;
 	}
-	
-	
+
+	public List<Livro> getLivros() {
+		return livros;
+	}
+	public void adicionarLivro(Livro livro) {
+        livros.add(livro);
+    }	
 
 }
