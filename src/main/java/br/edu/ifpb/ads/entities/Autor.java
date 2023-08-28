@@ -1,78 +1,45 @@
 package br.edu.ifpb.ads.entities;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "TB_AUTOR")
-public class Autor implements Serializable {	
+@DiscriminatorValue("autor")
+public class Autor extends Pessoa {	
 	
-	private static final long serialVersionUID = 1L;
+
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	
-	@NotBlank
-	private String nome;
-	
-	@Column(name = "data_nascimento", columnDefinition = "DATE", nullable = true)
-	private Date data_nascimento;
-	
-	@Column(name = "Biografia")
+	@Column(name = "biografia", nullable = false)
 	private String biografia;	
 
-	@Column(name = "Nacionalidade")
+	@Column(name = "nacionalidade", nullable = false)
 	private String nacionalidade;
 	
-	@Column(name = "Genero_literario")
-	private String genero_literario;
+	@Column(name = "genero_literario", nullable = false)
+	private String generoLiterario;
 	
 	@ManyToMany(mappedBy = "autores",cascade = CascadeType.ALL)
-	private List<Livro>livros = new ArrayList<>();
+	private List<Livro> livros = new ArrayList<>();
 	
 	
 	public Autor() {
 		
 	}
 
-	public Autor(String nome,String nacionalidade,Date data_nascimento) {		
-		this.nome = nome;
-		this.data_nascimento = data_nascimento;		
-		this.nacionalidade = nacionalidade;		
-	}
 	
-	public long getId() {
-		return id;
+	public Autor(String biografia, String nacionalidade, String generoLiterario, List<Livro> livros) {
+		this.biografia = biografia;
+		this.nacionalidade = nacionalidade;
+		this.generoLiterario = generoLiterario;
+		this.livros = livros;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public Date getDataNascimento() {
-		return data_nascimento;
-	}
-
-	public void setDataNascimento(Date dataNascimento) {
-		this.data_nascimento = dataNascimento;
-	}
 
 	public String getBiografia() {
 		return biografia;
@@ -90,12 +57,12 @@ public class Autor implements Serializable {
 		this.nacionalidade = nacionalidade;
 	}
 
-	public String getGenero_literario() {
-		return genero_literario;
+	public String getGeneroLiterario() {
+		return generoLiterario;
 	}
 
-	public void setGeneroLiterario(String genero_literario) {
-		this.genero_literario = genero_literario;
+	public void setGeneroLiterario(String generoLiterario) {
+		this.generoLiterario = generoLiterario;
 	}
 
 	public List<Livro> getLivros() {
@@ -103,6 +70,15 @@ public class Autor implements Serializable {
 	}
 	public void adicionarLivro(Livro livro) {
         livros.add(livro);
-    }	
+    }
+
+	@Override
+	public String toString() {
+		return "Autor [id=" + getId() + ", nome=" + getNome() + ", dataNascimento=" + getDataNascimento() + ", biografia=" + biografia
+				+ ", nacionalidade=" + nacionalidade + ", generoLiterario=" + generoLiterario + ", livros=" + livros
+				+ "]";
+	}
+	
+	
 
 }
