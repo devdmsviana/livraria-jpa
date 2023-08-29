@@ -1,6 +1,7 @@
 package br.edu.ifpb.ads.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,7 +23,7 @@ import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "TB_LIVROS")
+@Table(name = "TB_LIVRO")
 public class Livro implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -49,7 +50,7 @@ public class Livro implements Serializable {
 	private int numeroPaginas;
 
 	@Column(nullable = false)
-	private double preco;
+	private BigDecimal preco;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "livro_autores", joinColumns = @JoinColumn(name = "livro_id"), inverseJoinColumns = @JoinColumn(name = "autor_id"))
@@ -60,7 +61,7 @@ public class Livro implements Serializable {
 	}
 
 	public Livro(String titulo, String isbn, LocalDate anoPublicacao, String genero, String editora,
-			int numeroPaginas, double preco) {
+			int numeroPaginas, BigDecimal preco) {
 		super();
 		this.titulo = titulo;
 		this.isbn = isbn;
@@ -129,11 +130,11 @@ public class Livro implements Serializable {
 		this.numeroPaginas = numeroPaginas;
 	}
 
-	public double getPreco() {
+	public BigDecimal getPreco() {
 		return preco;
 	}
 
-	public void setPreco(double preco) {
+	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
 	}
 

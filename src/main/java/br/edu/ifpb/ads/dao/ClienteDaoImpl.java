@@ -57,14 +57,14 @@ public class ClienteDaoImpl extends DAO {
 		}	
 	}
 	
-	public Cliente pesquisar(String email) {
+	public Cliente pesquisar(long id) {
 		
 		EntityManager manager = getEntityManager();
 		
 		Cliente cliente = null;
 		
 		try {
-			cliente = manager.find(Cliente.class, email);
+			cliente = manager.find(Cliente.class, id);
 		} catch(Exception erro) {
 			System.out.println("Cliente não encontrado!");
 		} finally {

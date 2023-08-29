@@ -7,6 +7,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
 
 @Entity
@@ -24,7 +25,7 @@ public class Autor extends Pessoa {
 	@Column(name = "genero_literario", nullable = false)
 	private String generoLiterario;
 	
-	@ManyToMany(mappedBy = "autores",cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "autores", cascade = CascadeType.ALL)
 	private List<Livro> livros = new ArrayList<>();
 	
 	

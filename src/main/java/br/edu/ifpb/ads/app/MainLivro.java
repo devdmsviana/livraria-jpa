@@ -1,6 +1,8 @@
 package br.edu.ifpb.ads.app;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import br.edu.ifpb.ads.dao.LivroDaoImpl;
 import br.edu.ifpb.ads.entities.Autor;
@@ -10,7 +12,14 @@ public class MainLivro {
 
     public static void main(String[] args) {
         LivroDaoImpl livroDao = new LivroDaoImpl();
-        Livro livroNovo = null;
+        Livro livro = new Livro();
+            livro.setTitulo("Aventuras Incríveis");
+            livro.setAnoPublicacao(LocalDate.of(2005, 8, 28));
+            livro.setNumeroPaginas(300);
+            livro.setEditora("Chiado Editora");
+            livro.setIsbn("ISBN-1");
+            livro.setGenero("Ação");
+            livro.setPreco(BigDecimal.valueOf(29.90));
 
         // Criando e salvando um novo autor e livro
         try {
@@ -28,29 +37,20 @@ public class MainLivro {
             outroAutor.setBiografia("Professora de sociologia...");
             outroAutor.setGeneroLiterario("Romance");
 
-            // Criando e salvando um novo livro
-            livroNovo = new Livro();
-            livroNovo.setTitulo("Aventuras Incríveis");
-            livroNovo.setAnoPublicacao(LocalDate.of(2005, 8, 28));
-            livroNovo.setNumeroPaginas(300);
-            livroNovo.setEditora("Chiado Editora");
-            livroNovo.setIsbn("ISBN-1");
-            livroNovo.setGenero("Ação");
-            livroNovo.setPreco(49.99);
 
             // Associando o autor ao livro
-            livroNovo.adicionarAutor(autorNovo);
-            livroNovo.adicionarAutor(outroAutor);
+            livro.adicionarAutor(autorNovo);
+            livro.adicionarAutor(outroAutor);
 
-            livroDao.salvar(livroNovo);
+            livroDao.salvar(livro);
 
         } catch (Exception erro) {
             System.out.println(erro);
         }
 
-        /*
+        
         // Pesquisando o livro pelo ID
-        Livro livroPesquisado = livroDao.pesquisar(livroNovo.getId());
+        Livro livroPesquisado = livroDao.pesquisar(1);
         if (livroPesquisado != null) {
             System.out.println("Livro encontrado: " + livroPesquisado.getTitulo());
 
@@ -64,12 +64,12 @@ public class MainLivro {
         }
 
         // Atualizando o livro
-        livroPesquisado.setTitulo("Novo Título Incrível");
-        livroDao.atualizar(livroPesquisado);
+        //livroPesquisado.setTitulo("Novo Título Incrível");
+       // livroDao.atualizar(livroPesquisado);
 
         // Deletando o livro
-        livroDao.deletar(livroPesquisado);
-         */
+        //livroDao.deletar(livroPesquisado);
+         
     }
 
 }

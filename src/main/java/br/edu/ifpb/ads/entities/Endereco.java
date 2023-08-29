@@ -5,10 +5,10 @@ import java.io.Serializable;
 
 
 @Entity
-@Table(name = "TB_ENDERECOS")
-public class Endereco  implements Serializable {
+@Table(name = "TB_ENDERECO")
+public class Endereco {
 
-    private static final long serialVersionUID = 1L;
+    
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
