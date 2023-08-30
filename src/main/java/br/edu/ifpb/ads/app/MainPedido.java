@@ -28,17 +28,16 @@ public class MainPedido {
             ItemPedido itemPedido = new ItemPedido();
             itemPedido.setLivro(livro);
             itemPedido.setPrecoLivro(livro.getPreco());
-            itemPedido.setQuantidade(2);
+            itemPedido.setQuantidade(10);
 
             List<ItemPedido> itensPedido = new ArrayList<>();
             itensPedido.add(itemPedido);
 
             
-
             //  Criar pedido e associar cliente
             Pedido pedido = new Pedido();
             pedido.setCliente(cliente);
-            pedido.setDataConclusao(LocalDateTime.now());
+            pedido.setDataConclusao(LocalDateTime.of(2023, 8, 29, 15, 30, 15));
             pedido.setTotal(BigDecimal.ZERO);
 
             // Associar itens de pedido ao pedido
@@ -48,8 +47,11 @@ public class MainPedido {
             // Calcular o total do pedido
             pedido.calcularTotal();
 
-            // Persistir o livro e o pedido
+            // Persistir pedido
             pedidoDao.salvar(pedido); 
+
+            // Adicionar referencia do pedido ao cliente
+            cliente.adicionarPedido(pedido);
         } catch (Exception erro) {
             System.out.println(erro);
         }

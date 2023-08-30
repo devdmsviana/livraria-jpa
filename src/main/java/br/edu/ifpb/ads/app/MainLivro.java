@@ -12,7 +12,11 @@ public class MainLivro {
 
     public static void main(String[] args) {
         LivroDaoImpl livroDao = new LivroDaoImpl();
-        Livro livro = new Livro();
+        Livro livro = null;
+            
+        // Criando e salvando um novo autor e livro
+         try {
+            livro = new Livro();
             livro.setTitulo("Aventuras Incríveis");
             livro.setAnoPublicacao(LocalDate.of(2005, 8, 28));
             livro.setNumeroPaginas(300);
@@ -21,8 +25,6 @@ public class MainLivro {
             livro.setGenero("Ação");
             livro.setPreco(BigDecimal.valueOf(29.90));
 
-        // Criando e salvando um novo autor e livro
-        try {
             Autor autorNovo = new Autor();
             autorNovo.setNome("João Silva");
             autorNovo.setDataNascimento(LocalDate.of(1998, 7, 17));
@@ -46,10 +48,10 @@ public class MainLivro {
 
         } catch (Exception erro) {
             System.out.println(erro);
-        }
+        } 
 
         
-        // Pesquisando o livro pelo ID
+        /*  Pesquisando o livro pelo ID
         Livro livroPesquisado = livroDao.pesquisar(1);
         if (livroPesquisado != null) {
             System.out.println("Livro encontrado: " + livroPesquisado.getTitulo());
@@ -61,11 +63,11 @@ public class MainLivro {
             } 
         } else {
             System.out.println("Livro não encontrado!");
-        }
+        }*/
 
         // Atualizando o livro
         //livroPesquisado.setTitulo("Novo Título Incrível");
-       // livroDao.atualizar(livroPesquisado);
+        //livroDao.atualizar(livroPesquisado);
 
         // Deletando o livro
         //livroDao.deletar(livroPesquisado);

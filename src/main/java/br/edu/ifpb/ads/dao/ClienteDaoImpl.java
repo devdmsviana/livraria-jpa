@@ -46,7 +46,7 @@ public class ClienteDaoImpl extends DAO {
 		
 		try {
 			manager.getTransaction().begin();
-			manager.remove(manager.find(Cliente.class, cliente.getEmail()));
+			manager.remove(manager.find(Cliente.class, cliente.getId()));
 			manager.getTransaction().commit();
 			System.out.println("Cliente deletado com sucesso!");
 		} catch(Exception erro) {

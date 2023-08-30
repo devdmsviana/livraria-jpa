@@ -16,85 +16,78 @@ import jakarta.persistence.Table;
 @Table(name = "TB_ITENS_PEDIDO")
 public class ItemPedido {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
+	@ManyToOne
+	@JoinColumn(name = "pedido_id", nullable = false)
+	private Pedido pedido;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "livro_id", nullable = false)
+	private Livro livro;
 
-    @ManyToOne
-    @JoinColumn(name = "pedido_id", nullable = false)
-    private Pedido pedido;
+	@Column(name = "preco_livro", nullable = false)
+	private BigDecimal precoLivro;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "livro_id", nullable = false)
-    private Livro livro;
+	@Column(name = "quantidade", nullable = false)
+	private Integer quantidade;
 
-    @Column(name = "preco_livro", nullable = false)
-    private BigDecimal precoLivro;
+	public ItemPedido() {
+	}
 
-    @Column(name = "quantidade", nullable = false)
-    private Integer quantidade;
+	public ItemPedido(Pedido pedido, Livro livro, BigDecimal precoLivro, Integer quantidade) {
+		this.pedido = pedido;
+		this.livro = livro;
+		this.precoLivro = precoLivro;
+		this.quantidade = quantidade;
+	}
 
+	public Long getId() {
+		return id;
+	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public ItemPedido() {
-    }
+	public Pedido getPedido() {
+		return pedido;
+	}
 
-    public ItemPedido(Pedido pedido, Livro livro, BigDecimal precoLivro, Integer quantidade) {
-        this.pedido = pedido;
-        this.livro = livro;
-        this.precoLivro = precoLivro;
-        this.quantidade = quantidade;
-    }
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Livro getLivro() {
+		return livro;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setLivro(Livro livro) {
+		this.livro = livro;
+	}
 
-    public Pedido getPedido() {
-        return pedido;
-    }
+	public BigDecimal getPrecoLivro() {
+		return precoLivro;
+	}
 
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
-    }
+	public void setPrecoLivro(BigDecimal precoLivro) {
+		this.precoLivro = precoLivro;
+	}
 
-    public Livro getLivro() {
-        return livro;
-    }
+	public Integer getQuantidade() {
+		return quantidade;
+	}
 
-    public void setLivro(Livro livro) {
-        this.livro = livro;
-    }
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
 
-    public BigDecimal getPrecoLivro() {
-        return precoLivro;
-    }
+	@Override
+	public String toString() {
+		return "ItemPedido [id=" + id + ", pedido=" + pedido + ", livro=" + livro + ", precoLivro=" + precoLivro
+				+ ", quantidade=" + quantidade + "]";
+	}
 
-    public void setPrecoLivro(BigDecimal precoLivro) {
-        this.precoLivro = precoLivro;
-    }
-
-    public Integer getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    @Override
-    public String toString() {
-        return "ItemPedido [id=" + id + ", pedido=" + pedido + ", livro=" + livro + ", precoLivro=" + precoLivro
-                + ", quantidade=" + quantidade + "]";
-    }
-    
-    
-
-    
 }

@@ -1,17 +1,25 @@
 package br.edu.ifpb.ads.app;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.edu.ifpb.ads.dao.ClienteDaoImpl;
-import br.edu.ifpb.ads.entities.Cliente;
-import br.edu.ifpb.ads.entities.Endereco;
+import br.edu.ifpb.ads.dao.LivroDaoImpl;
+import br.edu.ifpb.ads.dao.PedidoDaoImpl;
+import br.edu.ifpb.ads.entities.*;
 
 public class MainCliente {
 
     public static void main(String[] args) throws ParseException {
 
+
         ClienteDaoImpl clienteDao = new ClienteDaoImpl();
+
+
         try {
 
             // Criando endereco
@@ -31,7 +39,6 @@ public class MainCliente {
             cliente.setEmail("diogo.silva@gmail.com");
             cliente.setTelefone("81996586205");
 
-            
             clienteDao.salvar(cliente);
         } catch (Exception erro) {
             System.out.println(erro);

@@ -27,7 +27,7 @@ public class Cliente extends Pessoa {
     @JoinColumn(name = "endereco_cliente", nullable = false)
     private Endereco endereco;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Pedido> pedidos;
 
     public Cliente() {
@@ -75,15 +75,10 @@ public class Cliente extends Pessoa {
         this.pedidos.remove(pedido);
     }
 
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "id=" + getId() +
-                ", nome='" + getNome() + '\'' +
-                ", dataNascimento=" + getDataNascimento() +
-                ", email='" + email + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", endereco=" + endereco +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Cliente [email=" + email + ", telefone=" + telefone + ", endereco=" + endereco + ", pedidos=" + pedidos
+				+ "]";
+	}
+
 }
