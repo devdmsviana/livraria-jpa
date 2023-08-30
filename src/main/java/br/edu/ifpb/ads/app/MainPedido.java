@@ -40,6 +40,7 @@ public class MainPedido {
             pedido.setDataConclusao(LocalDateTime.of(2023, 8, 29, 15, 30, 15));
             pedido.setTotal(BigDecimal.ZERO);
 
+
             // Associar itens de pedido ao pedido
             itemPedido.setPedido(pedido);
             pedido.setItens(itensPedido);

@@ -12,12 +12,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ClienteTest {
 
-    private EntityManagerFactory emf;
     private ClienteDaoImpl clienteDao;
 
     @BeforeEach
     public void setUp() {
-        emf = Persistence.createEntityManagerFactory("LivrariaJPA");
         clienteDao = new ClienteDaoImpl();
     }
 

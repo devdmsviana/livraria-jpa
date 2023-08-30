@@ -5,17 +5,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import br.edu.ifpb.ads.enums.StatusPedido;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "TB_PEDIDO")
@@ -43,6 +34,16 @@ public class Pedido {
     @Column(name = "total")
     private BigDecimal total;
 
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private StatusPedido status;
+
+
+
+    public Pedido() {
+        this.dataPedido = LocalDateTime.now();
+        this.status = StatusPedido.PENDENTE;
+    }
 
     public void calcularTotal(){
         if(itens != null){
@@ -51,8 +52,9 @@ public class Pedido {
         }
     }
 
-    public Pedido() {
-        this.dataPedido = LocalDateTime.now();
+
+    public void alterarStatusPedido(String status){
+        this.status = StatusPedido.valueOf(status);
     }
 
     public Pedido(Cliente cliente, List<ItemPedido> itens, LocalDateTime dataConclusao,
@@ -112,11 +114,24 @@ public class Pedido {
         this.total = total;
     }
 
-    @Override
-    public String toString() {
-        return "Pedido [id=" + id + ", cliente=" + cliente + ", itens=" + itens + ", dataPedido=" + dataPedido
-                + ", dataConclusao=" + dataConclusao + ", total=" + total + "]";
+    public StatusPedido getStatus() {
+        return status;
     }
 
-    
+    public void setStatus(StatusPedido status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "id=" + id +
+                ", cliente=" + cliente +
+                ", itens=" + itens +
+                ", dataPedido=" + dataPedido +
+                ", dataConclusao=" + dataConclusao +
+                ", total=" + total +
+                ", status=" + status +
+                '}';
+    }
 }
