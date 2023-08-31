@@ -27,7 +27,7 @@ public class Cliente extends Pessoa {
     @JoinColumn(name = "endereco_cliente", nullable = false)
     private Endereco endereco;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Pedido> pedidos;
 
     public Cliente() {
@@ -74,6 +74,15 @@ public class Cliente extends Pessoa {
     public void removerPedido(Pedido pedido){
         this.pedidos.remove(pedido);
     }
+    
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
 
 	@Override
 	public String toString() {

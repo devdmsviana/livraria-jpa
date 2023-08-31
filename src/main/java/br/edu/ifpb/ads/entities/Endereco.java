@@ -1,8 +1,6 @@
 package br.edu.ifpb.ads.entities;
 import jakarta.persistence.*;
 
-import java.io.Serializable;
-
 
 @Entity
 @Table(name = "TB_ENDERECO")

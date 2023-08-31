@@ -2,8 +2,7 @@ package br.edu.ifpb.ads.enums;
 
 public enum StatusPedido {
 
-    PENDENTE("Pendente"),
-    PAGO("Pago"),
+    AGUARDANDO_PAGAMENTO("Pendente"),
     FINALIZADO("Finalizado");
 
     private String descricao;

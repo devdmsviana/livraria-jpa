@@ -1,6 +1,5 @@
 package br.edu.ifpb.ads.entities;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;

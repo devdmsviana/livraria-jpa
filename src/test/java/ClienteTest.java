@@ -1,8 +1,6 @@
 import br.edu.ifpb.ads.dao.ClienteDaoImpl;
 import br.edu.ifpb.ads.entities.Cliente;
 import br.edu.ifpb.ads.entities.Endereco;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

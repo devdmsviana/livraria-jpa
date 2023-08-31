@@ -86,7 +86,7 @@ public class ItemPedido {
 
 	@Override
 	public String toString() {
-		return "ItemPedido [id=" + id + ", pedido=" + pedido + ", livro=" + livro + ", precoLivro=" + precoLivro
+		return "ItemPedido [id=" + id + ", pedido=" + pedido.getId() + ", livro=" + livro.getTitulo() + ", precoLivro=" + precoLivro
 				+ ", quantidade=" + quantidade + "]";
 	}
 

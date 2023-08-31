@@ -2,8 +2,6 @@ package br.edu.ifpb.ads.app;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
-
 import br.edu.ifpb.ads.dao.LivroDaoImpl;
 import br.edu.ifpb.ads.entities.Autor;
 import br.edu.ifpb.ads.entities.Livro;

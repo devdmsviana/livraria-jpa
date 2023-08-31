@@ -1,16 +1,11 @@
 package br.edu.ifpb.ads.app;
 
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import br.edu.ifpb.ads.dao.ClienteDaoImpl;
-import br.edu.ifpb.ads.dao.LivroDaoImpl;
-import br.edu.ifpb.ads.dao.PedidoDaoImpl;
-import br.edu.ifpb.ads.entities.*;
+import br.edu.ifpb.ads.entities.Cliente;
+import br.edu.ifpb.ads.entities.Endereco;
 
 public class MainCliente {
 
@@ -19,7 +14,7 @@ public class MainCliente {
 
         ClienteDaoImpl clienteDao = new ClienteDaoImpl();
 
-
+        
         try {
 
             // Criando endereco
@@ -42,8 +37,12 @@ public class MainCliente {
             clienteDao.salvar(cliente);
         } catch (Exception erro) {
             System.out.println(erro);
-        }
-
+        } 
+        
+        // Buscar pedidos de um cliente
+        Cliente clientePesquisado = clienteDao.pesquisar(1);
+        System.out.println(clienteDao.buscarPedidosPorCliente(clientePesquisado));
+      
     }
 
 }

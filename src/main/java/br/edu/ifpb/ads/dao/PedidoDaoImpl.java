@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.edu.ifpb.ads.entities.ItemPedido;
 import br.edu.ifpb.ads.entities.Pedido;
+import br.edu.ifpb.ads.enums.StatusPedido;
 import jakarta.persistence.EntityManager;
 
 public class PedidoDaoImpl extends DAO {
@@ -70,6 +71,7 @@ public class PedidoDaoImpl extends DAO {
 	public void atualizar(Pedido pedido) {
 	
 		EntityManager manager = getEntityManager();
+		
 	
 		try {
 			manager.getTransaction().begin();

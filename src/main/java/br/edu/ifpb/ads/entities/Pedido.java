@@ -1,7 +1,6 @@
 package br.edu.ifpb.ads.entities;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import jakarta.persistence.*;
 @Table(name = "TB_PEDIDO")
 public class Pedido {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,9 +19,8 @@ public class Pedido {
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "pedido")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pedido")
     private List<ItemPedido> itens;
-   
 
     @Column(name = "data_pedido", nullable = false)
     private LocalDateTime dataPedido;
@@ -34,27 +31,20 @@ public class Pedido {
     @Column(name = "total")
     private BigDecimal total;
 
-    @Column(name = "status")
+    @Column(name = "status_pedido", nullable = false)
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
 
-
-
     public Pedido() {
         this.dataPedido = LocalDateTime.now();
-        this.status = StatusPedido.PENDENTE;
+        this.status = StatusPedido.AGUARDANDO_PAGAMENTO;
     }
 
-    public void calcularTotal(){
-        if(itens != null){
-            total = itens.stream().map( i -> new BigDecimal(i.getQuantidade()).multiply(i.getPrecoLivro()))
-            .reduce(BigDecimal.ZERO, BigDecimal::add);
+    public void calcularTotal() {
+        if (itens != null) {
+            total = itens.stream().map(i -> new BigDecimal(i.getQuantidade()).multiply(i.getPrecoLivro()))
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
         }
-    }
-
-
-    public void alterarStatusPedido(String status){
-        this.status = StatusPedido.valueOf(status);
     }
 
     public Pedido(Cliente cliente, List<ItemPedido> itens, LocalDateTime dataConclusao,
@@ -120,18 +110,19 @@ public class Pedido {
 
     public void setStatus(StatusPedido status) {
         this.status = status;
+        if(status.getDescricao().equalsIgnoreCase("Finalizado")) {
+        	this.setDataConclusao(LocalDateTime.now());
+        }
     }
 
     @Override
     public String toString() {
         return "Pedido{" +
                 "id=" + id +
-                ", cliente=" + cliente +
-                ", itens=" + itens +
-                ", dataPedido=" + dataPedido +
-                ", dataConclusao=" + dataConclusao +
+                ", cliente=" + cliente.getNome() + 
                 ", total=" + total +
                 ", status=" + status +
+                ", quantidadePedidos=" + (itens != null ? itens.size() : 0) +
                 '}';
     }
 }

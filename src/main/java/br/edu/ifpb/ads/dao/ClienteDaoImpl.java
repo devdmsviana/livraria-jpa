@@ -1,6 +1,9 @@
 package br.edu.ifpb.ads.dao;
 
+import java.util.List;
+
 import br.edu.ifpb.ads.entities.Cliente;
+import br.edu.ifpb.ads.entities.Pedido;
 import jakarta.persistence.EntityManager;
 
 public class ClienteDaoImpl extends DAO {
@@ -73,5 +76,19 @@ public class ClienteDaoImpl extends DAO {
 		
 		return cliente;
 	}
+	
+	public List<Pedido> buscarPedidosPorCliente(Cliente cliente) {
+	    EntityManager manager = getEntityManager();
+
+	    try {
+	        String jpql = "SELECT p FROM Pedido p WHERE p.cliente = :cliente";
+	        return manager.createQuery(jpql, Pedido.class)
+	                      .setParameter("cliente", cliente)
+	                      .getResultList();
+	    } finally {
+	        manager.close();
+	    }
+	}
+
     
 }
