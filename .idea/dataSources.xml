@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="cinema-jpa@localhost" uuid="337066e0-b91b-45c6-955f-a386ef62a1be">
+    <data-source source="LOCAL" name="livraria-jpa@localhost" uuid="59fb800b-b7ce-4510-8b92-10230a8bc2ba">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/cinema-jpa</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/livraria-jpa</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

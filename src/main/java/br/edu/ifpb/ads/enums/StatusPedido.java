@@ -5,7 +5,7 @@ public enum StatusPedido {
     AGUARDANDO_PAGAMENTO("Pendente"),
     FINALIZADO("Finalizado");
 
-    private String descricao;
+    private final String descricao;
     StatusPedido(String descricao) {
         this.descricao = descricao;
     }
