@@ -5,6 +5,7 @@ import java.util.List;
 import br.edu.ifpb.ads.entities.ItemPedido;
 import br.edu.ifpb.ads.entities.Pedido;
 import br.edu.ifpb.ads.enums.StatusPedido;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.EntityManager;
 
 public class PedidoDaoImpl extends DAO {
@@ -94,9 +95,11 @@ public class PedidoDaoImpl extends DAO {
 	
 		try {
 			manager.getTransaction().begin();
-	
+
 			manager.remove(manager.find(Pedido.class, pedido.getId()));
-	
+
+			manager.flush();
+
 			manager.getTransaction().commit();
 			System.out.println("Pedido deletado com sucesso!");
 		} catch (Exception erro) {

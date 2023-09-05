@@ -51,7 +51,7 @@ public class Livro implements Serializable {
 	@Column(nullable = false)
 	private BigDecimal preco;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinTable(name = "livro_autores", joinColumns = @JoinColumn(name = "livro_id"), inverseJoinColumns = @JoinColumn(name = "autor_id"))
 	private List<Autor> autores = new ArrayList<Autor>();
 

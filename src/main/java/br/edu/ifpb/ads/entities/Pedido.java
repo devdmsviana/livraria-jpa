@@ -19,7 +19,7 @@ public class Pedido {
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pedido")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItemPedido> itens;
 
     @Column(name = "data_pedido", nullable = false)

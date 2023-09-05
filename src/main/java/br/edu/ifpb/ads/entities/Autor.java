@@ -3,11 +3,7 @@ package br.edu.ifpb.ads.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 
 @Entity
 @DiscriminatorValue("autor")
@@ -24,10 +20,9 @@ public class Autor extends Pessoa {
 	@Column(name = "genero_literario", nullable = false)
 	private String generoLiterario;
 	
-	@ManyToMany(mappedBy = "autores", cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "autores", cascade = CascadeType.MERGE)
 	private List<Livro> livros = new ArrayList<>();
-	
-	
+
 	public Autor() {
 		
 	}

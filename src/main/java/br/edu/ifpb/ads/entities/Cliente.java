@@ -27,7 +27,7 @@ public class Cliente extends Pessoa {
     @JoinColumn(name = "endereco_cliente", nullable = false)
     private Endereco endereco;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cliente", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cliente")
     private List<Pedido> pedidos;
 
     public Cliente() {

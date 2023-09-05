@@ -24,32 +24,13 @@ public class MainPedido {
         ClienteDaoImpl clienteDao = new ClienteDaoImpl();
         LivroDaoImpl livroDao = new LivroDaoImpl();
 
-        /*
+
+        System.out.println("================ SALVANDO UM PEDIDO =================");
         try {
-        	Livro outroLivro = new Livro();
-        	outroLivro.setTitulo("Novo Livro");
-        	outroLivro.setAnoPublicacao(LocalDate.of(2005, 8, 28));
-        	outroLivro.setNumeroPaginas(300);
-        	outroLivro.setEditora("Teste Editora");
-        	outroLivro.setIsbn("345356");
-        	outroLivro.setGenero("Romance");
-        	outroLivro.setPreco(BigDecimal.valueOf(10.40));
-        	
-        	
-        	Autor autorNovo = new Autor();
-            autorNovo.setNome("Matheus Silva");
-            autorNovo.setDataNascimento(LocalDate.of(1998, 7, 17));
-            autorNovo.setNacionalidade("Brasil");
-            autorNovo.setBiografia("Professor de Psicologia...");
-            autorNovo.setGeneroLiterario("Autoajuda");
-            
-            
-        	
             //Salvar pedido
-            Livro livro = livroDao.pesquisar(1);
-            outroLivro.adicionarAutor(autorNovo);
-            livroDao.salvar(outroLivro);
             Cliente cliente = clienteDao.pesquisar(1);
+            Livro livro = livroDao.pesquisar(1);
+            Livro outroLivro = livroDao.pesquisar(2);
 
             ItemPedido itemPedido = new ItemPedido();
             itemPedido.setLivro(livro);
@@ -67,43 +48,70 @@ public class MainPedido {
 
             
             //  Criar pedido e associar cliente
-            Pedido pedido3 = new Pedido();
-            pedido3.setCliente(cliente);
-            pedido3.setDataConclusao(LocalDateTime.of(2023, 8, 29, 15, 30, 15));
-            pedido3.setTotal(BigDecimal.ZERO);
+            Pedido pedido = new Pedido();
+            pedido.setCliente(cliente);
+            pedido.setTotal(BigDecimal.ZERO);
 
 
             // Associar itens de pedido ao pedido
-            itemPedido.setPedido(pedido3);
-            itemPedido2.setPedido(pedido3);
+            itemPedido.setPedido(pedido);
+            itemPedido2.setPedido(pedido);
             
-            pedido3.setItens(itensPedido);
+            pedido.setItens(itensPedido);
 
             // Calcular o total do pedido
-            pedido3.calcularTotal();
+            pedido.calcularTotal();
 
             // Adicionar referencia do pedido ao cliente
-            cliente.adicionarPedido(pedido3);
+            cliente.adicionarPedido(pedido);
             
             // Persistir pedido
-            pedidoDao.salvar(pedido3); 
+            pedidoDao.salvar(pedido);
 
         } catch (Exception erro) {
             System.out.println(erro);
-        } */
-        
-        
-         
-        System.out.println("================ BUSCANDO UM PEDIDO =================");
+        }
+
+
         // Pesquisar pedido pelo ID
-        Pedido pedidoPesquisado = pedidoDao.buscarPorId(1);
-        System.out.println("Pedido encontrado: " + pedidoPesquisado.toString());
+        Pedido pedidoPesquisado = null;
+        System.out.println("================ BUSCANDO UM PEDIDO =================");
+        try {
+            pedidoPesquisado = pedidoDao.buscarPorId(1);
+            System.out.println("Pedido encontrado: " + pedidoPesquisado.toString());
+        } catch (Exception ex){
+            System.out.println(ex);
+        }
 
 
-        System.out.println("================ ATUALIZANDO STATUS DE UM PEDIDO =================");
         //Atualizar status pedido
-        pedidoPesquisado.setStatus(StatusPedido.FINALIZADO);
-        pedidoDao.atualizar(pedidoPesquisado); 
+        System.out.println("================ ATUALIZANDO STATUS DE UM PEDIDO =================");
+        try {
+            pedidoPesquisado.setStatus(StatusPedido.FINALIZADO);
+            pedidoDao.atualizar(pedidoPesquisado);
+            System.out.println("Pedido atualizado: " + pedidoPesquisado.toString());
+        } catch (Exception ex){
+            System.out.println(ex);
+        }
+
+        System.out.println("================ BUSCANDO TODOS OS PEDIDOS =================");
+        try {
+            List<Pedido> pedidos = pedidoDao.buscarTodos();
+            for (Pedido pedido : pedidos) {
+                System.out.println(pedido.toString());
+            }
+        } catch (Exception ex){
+            System.out.println(ex);
+        }
+
+        System.out.println("================ DELETAR PEDIDO =================");
+        try {
+            Pedido pedido = pedidoDao.buscarPorId(1);
+            pedidoDao.deletar(pedido);
+        } catch (Exception ex){
+            System.out.println(ex);
+        }
+
 
     }
 }

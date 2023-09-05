@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.time.LocalDate;
 
 import br.edu.ifpb.ads.dao.ClienteDaoImpl;
+import br.edu.ifpb.ads.dao.DAO;
 import br.edu.ifpb.ads.entities.Cliente;
 import br.edu.ifpb.ads.entities.Endereco;
 
@@ -14,9 +15,8 @@ public class MainCliente {
 
         ClienteDaoImpl clienteDao = new ClienteDaoImpl();
 
-        
+        System.out.println("=================== CADASTRANDO CLIENTE ===================");
         try {
-
             // Criando endereco
             Endereco endereco = new Endereco(
                     "Rua dos bobos",
@@ -39,10 +39,43 @@ public class MainCliente {
             System.out.println(erro);
         } 
         
-        // Buscar pedidos de um cliente
-        Cliente clientePesquisado = clienteDao.pesquisar(1);
-        System.out.println(clienteDao.buscarPedidosPorCliente(clientePesquisado));
-      
+        /* Buscar pedidos de um cliente
+        System.out.println("=================== BUSCANDO PEDIDOS DE UM CLIENTE ===================");
+        try {
+            Cliente clientePesquisado = clienteDao.pesquisar(1);
+            System.out.println(clienteDao.buscarPedidosPorCliente(clientePesquisado));
+        } catch (Exception erro) {
+            System.out.println(erro);
+        }
+
+        // Buscar um cliente
+        System.out.println("=================== BUSCANDO UM CLIENTE ===================");
+        try {
+            Cliente clientePesquisado = clienteDao.pesquisar(1);
+            System.out.println(clientePesquisado.toString());
+        } catch (Exception erro) {
+            System.out.println(erro);
+        }
+
+        // Atualizar um cliente
+        System.out.println("=================== ATUALIZANDO UM CLIENTE ===================");
+        try {
+            Cliente clientePesquisado = clienteDao.pesquisar(1);
+            clientePesquisado.setNome("Diogo Silva de Oliveira");
+            clienteDao.atualizar(clientePesquisado);
+        } catch (Exception erro) {
+            System.out.println(erro);
+        }
+
+
+        /* Remover um cliente
+        System.out.println("=================== REMOVENDO UM CLIENTE ===================");
+        try {
+            Cliente clientePesquisado = clienteDao.pesquisar(1);
+            clienteDao.deletar(clientePesquisado);
+        } catch (Exception erro) {
+            System.out.println(erro);
+        }*/
     }
 
 

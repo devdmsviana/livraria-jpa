@@ -2,7 +2,10 @@ package br.edu.ifpb.ads.dao;
 
 
 import br.edu.ifpb.ads.entities.Autor;
+import br.edu.ifpb.ads.entities.Livro;
 import jakarta.persistence.EntityManager;
+
+import java.util.List;
 
 public class AutorDaoImpl extends DAO {
 
@@ -73,6 +76,25 @@ public class AutorDaoImpl extends DAO {
 		}
 
 		return autor;
+	}
+
+	public List<Livro> buscarLivrosPorAutor(Autor autor) {
+
+		EntityManager manager = getEntityManager();
+
+		List<Livro> livros = null;
+
+		try {
+			livros = manager.createQuery("SELECT l FROM Livro l JOIN l.autores a WHERE a.id = :id")
+					.setParameter("id", autor.getId())
+					.getResultList();
+		} catch (Exception erro) {
+			System.out.println("Não foi possível buscar os livros do autor!");
+		} finally {
+			manager.close();
+		}
+
+		return livros;
 	}
 
 }
